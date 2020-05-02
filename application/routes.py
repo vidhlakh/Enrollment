@@ -29,3 +29,12 @@ def enrollment():
     term = request.form.get('term')
     return render_template("enrollment.html", enrollment=True, data={"id":id,"title":title,"term":term})    
 
+@app.route("/api/")
+@app.route("/api/<idx>")
+def api(idx=None):
+    if(idx == None):
+        jdata = courseData
+    else:
+        jdata = courseData[int(idx)]
+
+    return Response(json.dumps(jdata), mimetype="application/json")
